@@ -1,0 +1,15 @@
+
+  <div class="formContainer" [formGroup]="loginForm">
+    <label for="username">username: </label>
+    <input id="username" type="text" formControlName="username" >
+
+
+    <label for="password">password: </label>
+    <input id="password" type="password" formControlName="password">
+    <div *ngIf="loginForm.get('username')?.errors?.['errore']">
+      {{loginForm.get('username')?.errors?.['errore']}}
+    </div>
+    <label for="submit">invia</label>
+    <input id="submit" type="submit" (click)="onSubmit()">
+  </div>
+

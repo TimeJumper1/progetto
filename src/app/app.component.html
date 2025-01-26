@@ -1,9 +1,12 @@
 <router-outlet></router-outlet>
-<div class="prova">
-  <body *ngFor="let one of prova; " class="container">
+<body class="prova">
+  <div *ngFor="let one of prova; " class="container">
     <app-body class="body"></app-body>
-  </body>
-</div>
+  </div>
+
+</body>
+<app-login></app-login>
+<router-outlet></router-outlet>
 
 
 
