@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, SimpleChange} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {compileDeclareDirectiveFromMetadata} from "@angular/compiler";
 import {Router} from "@angular/router";
 // import { AuthService } from '../auth.service';
+import { Input } from '@angular/core'; // First, import Input
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,8 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
+  @Input() item = ''; // decorate the property with @Input()
+  @Output() newItemEvent = new EventEmitter<string>();
   constructor(private fb: FormBuilder, private router: Router) {
     function mioValidatore() {
       return (control: AbstractControl): { [key: string]: any } | null =>
@@ -26,6 +29,8 @@ export class LoginComponent {
     });
   }
 // , private authService: AuthService
+
+
   ngOnInit(){
     this.fb;
   }
@@ -44,13 +49,16 @@ export class LoginComponent {
       // Display error message for unsuccessful login
     }
   }
-  ngOnChanges(){
+
+  ngOnChanges(changes: SimpleChange){
 
 
     this.lanciaTutto();
 
 
-  }
+
+}
+
   lanciaTutto() {
     let array = [
       {
@@ -85,11 +93,15 @@ export class LoginComponent {
     stampa(){
       let arrayBruttoNumeri = [ 2, 3,5];
 
+
       // @ts-ignore
       console.log(this.sum(...arrayBruttoNumeri));
-// Expected output: 6
+
 
     }
+  lanciaOutput(value: string) {
+    this.newItemEvent.emit(value);
+  }
 
 
 }

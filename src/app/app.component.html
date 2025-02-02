@@ -1,11 +1,17 @@
 <router-outlet></router-outlet>
-<body class="prova">
+<body class="prova" >
   <div *ngFor="let one of prova; " class="container">
     <app-body class="body"></app-body>
   </div>
 
 </body>
-<app-login></app-login>
+<div >
+  <ul>
+    <li *ngFor="let item of items">{{item}}</li>
+  </ul>
+
+</div>
+<app-login (newItemEvent)="addItem($event)" [item]="title"></app-login>
 <router-outlet></router-outlet>
 
 

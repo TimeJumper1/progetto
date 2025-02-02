@@ -11,6 +11,9 @@
     </div>
     <label for="submit">invia</label>
     <input id="submit" type="submit" (click)="onSubmit()">
-    <h2 (click)="stampa()"> stamèpa</h2>
+    <h2 (click)="stampa()"> stampa e  {{item}}</h2>
+    <label for="item-input">Add an item:</label>
+    <input type="text" id="item-input" #newItem>
+    <button type="button" (click)="lanciaOutput(newItem.value)">Add to parent's list</button>
   </div>
 
