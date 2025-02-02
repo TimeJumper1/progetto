@@ -44,4 +44,52 @@ export class LoginComponent {
       // Display error message for unsuccessful login
     }
   }
+  ngOnChanges(){
+
+
+    this.lanciaTutto();
+
+
+  }
+  lanciaTutto() {
+    let array = [
+      {
+        "name":"pippo",
+        "valore":1
+      },
+      {
+        "name":"pluto",
+        "valore":11
+      },
+      {
+        "name":"paperino",
+        "valore":12
+      },{
+        "name":"osvaldo",
+        "valore":13
+      }
+
+    ]
+    let osvaldo = array.filter(nomi => nomi.name ==="osvaldo")
+    console.log(osvaldo)
+    let numeri = array.map(numeri => numeri.valore*numeri.valore)
+    console.log("valori quadrati"+numeri)
+    let numeroMassimo0 = array.reduce((massimo,corrente)=>
+      massimo.valore > corrente.valore ? massimo : corrente, array[0])
+    console.log("reduce"+numeroMassimo0)
+  }
+
+    sum(x:number, y:number, z:number) {
+      return x + y + z;
+    }
+    stampa(){
+      let arrayBruttoNumeri = [ 2, 3,5];
+
+      // @ts-ignore
+      console.log(this.sum(...arrayBruttoNumeri));
+// Expected output: 6
+
+    }
+
+
 }
