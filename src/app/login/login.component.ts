@@ -5,6 +5,12 @@ import {Router} from "@angular/router";
 // import { AuthService } from '../auth.service';
 import { Input } from '@angular/core'; // First, import Input
 import { Output, EventEmitter } from '@angular/core';
+import {filter, Observable, of, Subject} from 'rxjs';
+
+class NewsItem {
+  category: 'Bussiness' | 'Sports' | undefined;
+  content: string | undefined;
+}
 
 @Component({
   selector: 'app-login',
@@ -30,9 +36,15 @@ export class LoginComponent {
   }
 // , private authService: AuthService
 
-
+  subject$ = new Subject();
   ngOnInit(){
     this.fb;
+    this.subject$.subscribe(val => {
+      console.log(val);
+    });
+    this.subject$.next("1");
+    this.subject$.next("2");
+    this.subject$.complete();
   }
 
   onSubmit(): void {
@@ -52,10 +64,14 @@ export class LoginComponent {
 
   ngOnChanges(changes: SimpleChange){
 
-
+    const numbers$ = of(1, 2, 3);
     this.lanciaTutto();
 
-
+    numbers$.subscribe({
+      next: value => console.log('Observable emitted the next value: ' + value),
+      error: err => console.error('Observable emitted an error: ' + err),
+      complete: () => console.log('Observable emitted the complete notification')
+    });
 
 }
 
@@ -85,6 +101,11 @@ export class LoginComponent {
     let numeroMassimo0 = array.reduce((massimo,corrente)=>
       massimo.valore > corrente.valore ? massimo : corrente, array[0])
     console.log("reduce"+numeroMassimo0)
+    this.subject$.subscribe({
+      next: value => console.log('subjetc belloh ' + value),
+      error: err => console.error('Observable emitted an error: ' + err),
+      complete: () => console.log('Observable emitted the complete notification')
+    });
   }
 
     sum(x:number, y:number, z:number) {
@@ -101,6 +122,31 @@ export class LoginComponent {
     }
   lanciaOutput(value: string) {
     this.newItemEvent.emit(value);
+    this.funzzioneConnomePocoOriginale();
+  }
+
+  funzzioneConnomePocoOriginale(){
+    const newsFeed$ = new Observable<NewsItem>((subscriber) => {
+      setTimeout(() => {
+        subscriber.next({ category: 'Bussiness', content: 'A' });
+      }, 1000);
+      setTimeout(() => {
+        subscriber.next({ category: 'Sports', content: 'B' });
+      }, 3000);
+      setTimeout(() => {
+        subscriber.next({ category: 'Bussiness', content: 'C' });
+      }, 4000);
+      setTimeout(() => {
+        subscriber.next({ category: 'Sports', content: 'D' });
+      }, 5000);
+      setTimeout(() => {
+        subscriber.next({ category: 'Bussiness', content: 'E' });
+      }, 6000);
+    });
+
+    newsFeed$
+      .pipe(filter((item) => item.category === 'Sports'))
+      .subscribe((item) => console.log("pippo suppli "+item));
   }
 
 

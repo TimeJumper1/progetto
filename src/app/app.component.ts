@@ -12,5 +12,9 @@ export class AppComponent {
 
   addItem(newItem: string) {
     this.items.push(newItem);
+    this.user.age = Math.random();
   }
+  user = { name:'Rohit', age: 23};
+
+
 }

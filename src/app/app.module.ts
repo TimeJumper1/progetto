@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BodyComponent } from './body/body.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MyPipePipe } from './pipes/my-pipe.pipe';
+import {AsyncObservablePipeComponent} from "../service/asyncPipe";
 
 
 @NgModule({
@@ -13,14 +15,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppComponent,
     BodyComponent,
     LoginComponent,
+    MyPipePipe,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AsyncObservablePipeComponent,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

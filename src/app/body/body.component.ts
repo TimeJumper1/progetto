@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+
+  styleUrls: ['./body.component.scss'],
+  template: `
+    <h2>proiezionando insieme</h2>
+    <ng-content></ng-content>
+  `
 })
 export class BodyComponent {
 
