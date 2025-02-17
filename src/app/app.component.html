@@ -1,7 +1,9 @@
 <router-outlet></router-outlet>
 <body class="prova" >
   <div *ngFor="let one of prova; " class="container">
-    <app-body class="body"></app-body>
+    <app-body class="body">
+      <h2>content proiezione</h2>
+    </app-body>
   </div>
 
 </body>
@@ -11,7 +13,9 @@
   </ul>
 
 </div>
+<div> {{ user.age | myPipe }} </div>
 <app-login (newItemEvent)="addItem($event)" [item]="title"></app-login>
+<async-observable-pipe></async-observable-pipe>
 <router-outlet></router-outlet>
 
 
