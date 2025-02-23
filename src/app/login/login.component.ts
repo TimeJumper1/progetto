@@ -123,6 +123,7 @@ export class LoginComponent {
   lanciaOutput(value: string) {
     this.newItemEvent.emit(value);
     this.funzzioneConnomePocoOriginale();
+    
   }
 
   funzzioneConnomePocoOriginale(){
@@ -144,10 +145,17 @@ export class LoginComponent {
       }, 6000);
     });
 
-    newsFeed$
+    const sub:Subscrition = newsFeed$
       .pipe(filter((item) => item.category === 'Sports'))
       .subscribe((item) => console.log("pippo suppli "+item));
+      sub.unsubscribe();
   }
 
+  - Refactoring struttura
+  - Change Detection
+  - Validators - metterlo esterno non nel costruttore
+  - Guardie - SOLO DA BINDARE ALLA ROTTA
+  - Interceptor
+  - Resolvers
 
 }
