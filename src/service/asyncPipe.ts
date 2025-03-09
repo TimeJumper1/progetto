@@ -10,7 +10,8 @@ import {interval} from "rxjs";
   imports: [CommonModule]
 })
 export class AsyncObservablePipeComponent {
+
   time = new Observable<string>(observer => {
     setInterval(() => observer.next(new Date().toString()), 1000);
-  }).pipe(interval());
+  }).pipe();
 }

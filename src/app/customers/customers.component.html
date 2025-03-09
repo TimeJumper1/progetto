@@ -1,1 +1,15 @@
 <p>customers works!</p>
+<div class="wrapper">
+  <div *ngFor="let product of products" class="card">
+
+    <div>
+      <h3>{{product.id}}</h3>
+
+      <p>{{product.title}}</p>
+    </div>
+    <div class="cart-btn-div">
+      <button type ="button">Add to Cart</button>
+    </div>
+  </div>
+  <p>aoaoao</p>
+</div>

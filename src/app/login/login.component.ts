@@ -1,11 +1,12 @@
 import {Component, SimpleChange} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {compileDeclareDirectiveFromMetadata} from "@angular/compiler";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 // import { AuthService } from '../auth.service';
 import { Input } from '@angular/core'; // First, import Input
 import { Output, EventEmitter } from '@angular/core';
-import {filter, Observable, of, Subject} from 'rxjs';
+import {filter, Observable, of, Subject, Subscription} from 'rxjs';
+import {Product} from "../ObjModel/product";
 
 class NewsItem {
   category: 'Bussiness' | 'Sports' | undefined;
@@ -19,6 +20,7 @@ class NewsItem {
 })
 export class LoginComponent {
   loginForm: FormGroup;
+
   @Input() item = ''; // decorate the property with @Input()
   @Output() newItemEvent = new EventEmitter<string>();
   constructor(private fb: FormBuilder, private router: Router) {
@@ -33,6 +35,7 @@ export class LoginComponent {
       username: ['', [Validators.required,mioValidatore()]],
       password: ['', Validators.required],
     });
+
   }
 // , private authService: AuthService
 
@@ -45,6 +48,7 @@ export class LoginComponent {
     this.subject$.next("1");
     this.subject$.next("2");
     this.subject$.complete();
+
   }
 
   onSubmit(): void {
@@ -123,7 +127,7 @@ export class LoginComponent {
   lanciaOutput(value: string) {
     this.newItemEvent.emit(value);
     this.funzzioneConnomePocoOriginale();
-    
+
   }
 
   funzzioneConnomePocoOriginale(){
@@ -145,17 +149,17 @@ export class LoginComponent {
       }, 6000);
     });
 
-    const sub:Subscrition = newsFeed$
+    const sub:Subscription = newsFeed$
       .pipe(filter((item) => item.category === 'Sports'))
       .subscribe((item) => console.log("pippo suppli "+item));
       sub.unsubscribe();
   }
 
-  - Refactoring struttura
-  - Change Detection
-  - Validators - metterlo esterno non nel costruttore
-  - Guardie - SOLO DA BINDARE ALLA ROTTA
-  - Interceptor
-  - Resolvers
+  // - Refactoring struttura
+  // - Change Detection
+  // - Validators - metterlo esterno non nel costruttore
+  // - Guardie - SOLO DA BINDARE ALLA ROTTA
+  // - Interceptor
+  // - Resolvers
 
 }
